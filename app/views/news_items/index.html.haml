@@ -1,0 +1,7 @@
+- @news_items.each do |item|
+  .item
+    .name= item.title
+    .content= item.content
+    .date= item.date
+
+= link_to t('.link_new'), new_news_item

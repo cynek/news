@@ -1,0 +1,24 @@
+.field
+  = f.label :title
+  = f.text_field :title
+.field
+  = f.label :content
+  = f.text_area :title
+.field
+  = f.label :date
+  = f.datetime_select :date
+
+= f.fields_for :locations do |location|
+  .locations
+    = location.check_box :_destroy
+    .field
+      = location.label :city_id
+      = location.collection_select :city_id, City.all, :prompt => true
+    .field
+      = location.label :lat
+      = location.text_field :lat
+    .field
+      = location.label :lng
+      = location.text_field :lng
+
+= f.commit
