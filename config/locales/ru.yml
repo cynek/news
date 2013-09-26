@@ -10,7 +10,7 @@ ru:
     attributes:
       news_item:
         title: "Название"
-        conetent: "Содержание"
+        content: "Содержание"
         date: "Дата"
         item_type: "Тип"
       city:
@@ -51,6 +51,7 @@ ru:
   news_items:
     index:
       title: "Новости"
+      link_new: "Добавить новость"
     update:
       invalid: "Невозможно сохранить данные"
     destroy:

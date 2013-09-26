@@ -7,13 +7,16 @@
 .field
   = f.label :date
   = f.datetime_select :date
+.field
+  = f.label :item_type
+  = f.select :item_type, NewsItem::ITEM_TYPES, :include_blank => true
 
 = f.fields_for :locations do |location|
   .locations
     = location.check_box :_destroy
     .field
       = location.label :city_id
-      = location.collection_select :city_id, City.all, :prompt => true
+      = location.collection_select :city_id, City.all, :id, :name, :prompt => true
     .field
       = location.label :lat
       = location.text_field :lat
@@ -21,4 +24,4 @@
       = location.label :lng
       = location.text_field :lng
 
-= f.commit
+= f.submit

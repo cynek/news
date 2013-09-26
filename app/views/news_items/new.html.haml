@@ -1,2 +1,7 @@
 = form_for @news_item do |f|
-  = render 'new', :f => f
+  .errors
+    = f.object.errors.full_messages.each do |field, message|
+      .error
+        .errfield= field
+        .errmsg= message
+  = render 'form', :f => f

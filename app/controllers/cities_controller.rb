@@ -10,7 +10,7 @@ class CitiesController < ApplicationController
   def create
     @city = City.new(params[:city])
     if @city.save
-      redirect_to :index
+      redirect_to cities_url
     else
       flash.now[:error] = I18n.t('cities.update.invalid')
       render :new

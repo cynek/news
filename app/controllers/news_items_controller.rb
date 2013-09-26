@@ -1,6 +1,4 @@
 class NewsItemsController < ApplicationController
-  accepts_nested_attributes_for :location, :allow_destroy => true
-
   def index
     @news_items = NewsItem.all
   end
@@ -13,7 +11,7 @@ class NewsItemsController < ApplicationController
   def create
     @news_item = NewsItem.new(params[:news_item])
     if @news_item.save
-      redirect_to :index
+      redirect_to news_items_url
     else
       flash.now[:error] = I18n.t('news_items.update.invalid')
       render :new

@@ -7,7 +7,9 @@ class NewsItem < ActiveRecord::Base
   has_many :locations, :dependent => :destroy
   has_many :cities, :through => :locations
 
-  scope :last, ->(count) { where(arel_table[:date].lt('NOW()')).order(:date => :desc).limit(count) }
+  accepts_nested_attributes_for :locations, :allow_destroy => true
+
+  scope :latest, ->(count) { where(arel_table[:date].lt('NOW()')).order(:date => :desc).limit(count) }
   scope :will, where(arel_table[:date].gt('NOW()'))
 
   validates :title,
@@ -22,12 +24,12 @@ class NewsItem < ActiveRecord::Base
     extend ActiveSupport::Concern
 
     included do
-      base.class_eval do
+      class_eval do
         default_scope { where(:deleted_at => nil) }
+        alias_method :destroy_full, :destroy
       end
     end
 
-    alias_method :destroy_full, :destroy
     def destroy
       run_callbacks :destroy do
         self.update_column(:deleted_at, Time.now.utc) rescue return nil
